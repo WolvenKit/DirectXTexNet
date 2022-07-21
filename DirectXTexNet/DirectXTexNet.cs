@@ -1168,6 +1168,7 @@ namespace DirectXTexNet
                                      {
                                          Path.Combine(folder, fileName),
                                          Path.Combine(folder, platform, fileName),
+                                         Path.Combine(folder, "lib", fileName),
                                          Path.Combine(folder, "runtimes", "win-" + platform, "native", fileName)
                                      })
             {
