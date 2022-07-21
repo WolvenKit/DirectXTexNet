@@ -310,7 +310,7 @@ namespace DirectXTexNet.Test
                             Console.WriteLine("Save Compressed DDS " + watch.ElapsedMilliseconds);
                             watch.Restart();
 
-                            using (var comp2 = TexHelper.Instance.LoadFromDDSFile(compFilePath, DDS_FLAGS.NONE))
+                            using (var comp2 = TexHelper.Instance.LoadFromDDSFile(compFilePath, DDS_FLAGS.NONE, out var metadata))
                             {
                                 Console.WriteLine("Load Compressed DDS " + watch.ElapsedMilliseconds);
                                 watch.Restart();
@@ -348,7 +348,7 @@ namespace DirectXTexNet.Test
             var refPath = GetImagePath("ThisIsATest.png");
 
             // Load image with DirectXTex.
-            using (var image = TexHelper.Instance.LoadFromDDSFile(path, DDS_FLAGS.NONE))
+            using (var image = TexHelper.Instance.LoadFromDDSFile(path, DDS_FLAGS.NONE, out var metadata))
             {
                 // Can't load a dds with System.Drawing, so load an identical png.
                 using (var expected = new Bitmap(refPath))

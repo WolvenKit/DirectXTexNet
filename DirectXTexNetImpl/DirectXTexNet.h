@@ -586,9 +586,9 @@ namespace DirectXTexNet
 
 
 		// Load Images
-		ScratchImage^ LoadFromDDSMemory(IntPtr pSource, Size_T size, DDS_FLAGS flags) override;
+		ScratchImage^ LoadFromDDSMemory(IntPtr pSource, Size_T size, DDS_FLAGS flags, [Out] TexMetadata^% metadata) override;
 
-		ScratchImage^ LoadFromDDSFile(String^ szFile, DDS_FLAGS flags) override;
+		ScratchImage^ LoadFromDDSFile(String^ szFile, DDS_FLAGS flags, [Out] TexMetadata^% metadata) override;
 
 		ScratchImage^ LoadFromHDRMemory(IntPtr pSource, Size_T size) override;
 

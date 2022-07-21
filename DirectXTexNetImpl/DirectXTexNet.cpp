@@ -384,14 +384,17 @@ namespace DirectXTexNet
 	// Image I/O
 
 	// DDS operations
-	ScratchImage^ TexHelperImpl::LoadFromDDSMemory(IntPtr pSource, Size_T size, DDS_FLAGS flags)
+	ScratchImage^ TexHelperImpl::LoadFromDDSMemory(IntPtr pSource, Size_T size, DDS_FLAGS flags, TexMetadata^% metadata)
 	{
 		auto image = gcnew ActualScratchImageImpl();
 		try
 		{
-			auto hr = DirectX::LoadFromDDSMemory(pSource.ToPointer(), static_cast<size_t>(size), static_cast<DirectX::DDS_FLAGS>(flags), nullptr, *image->scratchImage_);
+			DirectX::TexMetadata native;
+			auto hr = DirectX::LoadFromDDSMemory(pSource.ToPointer(), static_cast<size_t>(size), static_cast<DirectX::DDS_FLAGS>(flags), &native, *image->scratchImage_);
 
 			Marshal::ThrowExceptionForHR(hr);
+
+			metadata = ToManaged(native);
 
 			return image;
 		}
@@ -401,16 +404,19 @@ namespace DirectXTexNet
 			throw;
 		}
 	}
-	ScratchImage^ TexHelperImpl::LoadFromDDSFile(String^ szFile, DDS_FLAGS flags)
+	ScratchImage^ TexHelperImpl::LoadFromDDSFile(String^ szFile, DDS_FLAGS flags, TexMetadata^% metadata)
 	{
 		pin_ptr<const wchar_t> filenameCStr = PtrToStringChars(szFile);
 
 		auto image = gcnew ActualScratchImageImpl();
 		try
 		{
-			auto hr = DirectX::LoadFromDDSFile(filenameCStr, static_cast<DirectX::DDS_FLAGS>(flags), nullptr, *image->scratchImage_);
+			DirectX::TexMetadata native;
+			auto hr = DirectX::LoadFromDDSFile(filenameCStr, static_cast<DirectX::DDS_FLAGS>(flags), &native, *image->scratchImage_);
 
 			Marshal::ThrowExceptionForHR(hr);
+
+			metadata = ToManaged(native);
 
 			return image;
 		}

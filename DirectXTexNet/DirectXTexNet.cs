@@ -1300,9 +1300,9 @@ namespace DirectXTexNet
 
         #region Image I/O
         // DDS operations
-        public abstract ScratchImage LoadFromDDSMemory(IntPtr pSource, Size_T size, DDS_FLAGS flags);
+        public abstract ScratchImage LoadFromDDSMemory(IntPtr pSource, Size_T size, DDS_FLAGS flags, out TexMetadata metadata);
 
-        public abstract ScratchImage LoadFromDDSFile(String szFile, DDS_FLAGS flags);
+        public abstract ScratchImage LoadFromDDSFile(String szFile, DDS_FLAGS flags, out TexMetadata metadata);
 
         // HDR operations
         public abstract ScratchImage LoadFromHDRMemory(IntPtr pSource, Size_T size);
