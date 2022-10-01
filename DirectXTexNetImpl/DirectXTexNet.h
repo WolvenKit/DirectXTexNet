@@ -283,7 +283,7 @@ namespace DirectXTexNet
 			D3D11_BIND_FLAG bindFlags,
 			D3D11_CPU_ACCESS_FLAG cpuAccessFlags,
 			D3D11_RESOURCE_MISC_FLAG miscFlags,
-			bool forceSRGB) override;
+			CREATETEX_FLAGS flags) override;
 
 		ID3D11ShaderResourceViewPtr CreateShaderResourceViewEx(
 			ID3D11DevicePtr pDevice,
@@ -291,7 +291,7 @@ namespace DirectXTexNet
 			D3D11_BIND_FLAG bindFlags,
 			D3D11_CPU_ACCESS_FLAG cpuAccessFlags,
 			D3D11_RESOURCE_MISC_FLAG miscFlags,
-			bool forceSRGB) override;
+			CREATETEX_FLAGS flags) override;
 	};
 
 	ref class TempScratchImageImpl : ScratchImageImpl
@@ -545,6 +545,8 @@ namespace DirectXTexNet
 		Size_t ComputeImageIndex(TexMetadata^ metadata, Size_t mip, Size_t item, Size_t slice) override;
 
 		DXGI_FORMAT MakeSRGB(DXGI_FORMAT fmt) override;
+
+		DXGI_FORMAT MakeLinear(DXGI_FORMAT fmt) override;
 
 		DXGI_FORMAT MakeTypeless(DXGI_FORMAT fmt) override;
 

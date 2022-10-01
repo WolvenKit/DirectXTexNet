@@ -732,6 +732,15 @@ namespace DirectXTexNet
         /// </summary>
         ICO
     }
+
+    [Flags]
+    public enum CREATETEX_FLAGS
+    {
+        DEFAULT = 0,
+        FORCE_SRGB = 0x1,
+        IGNORE_SRGB = 0x2,
+    }
+
     #endregion
 
     #region Delegates
@@ -1138,7 +1147,7 @@ namespace DirectXTexNet
             D3D11_BIND_FLAG bindFlags,
             D3D11_CPU_ACCESS_FLAG cpuAccessFlags,
             D3D11_RESOURCE_MISC_FLAG miscFlags,
-            bool forceSRGB);
+            CREATETEX_FLAGS flags);
 
         public abstract ID3D11ShaderResourceViewPtr CreateShaderResourceViewEx(
             ID3D11DevicePtr pDevice,
@@ -1146,7 +1155,7 @@ namespace DirectXTexNet
             D3D11_BIND_FLAG bindFlags,
             D3D11_CPU_ACCESS_FLAG cpuAccessFlags,
             D3D11_RESOURCE_MISC_FLAG miscFlags,
-            bool forceSRGB);
+            CREATETEX_FLAGS flags);
         #endregion
 
         public virtual void Dispose()
@@ -1239,6 +1248,8 @@ namespace DirectXTexNet
         public abstract Size_t ComputeImageIndex(TexMetadata metadata, Size_t mip, Size_t item, Size_t slice);
 
         public abstract DXGI_FORMAT MakeSRGB(DXGI_FORMAT fmt);
+
+        public abstract DXGI_FORMAT MakeLinear(DXGI_FORMAT fmt);
 
         public abstract DXGI_FORMAT MakeTypeless(DXGI_FORMAT fmt);
 
