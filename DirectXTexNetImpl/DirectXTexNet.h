@@ -529,6 +529,8 @@ namespace DirectXTexNet
 
 		bool  IsSRGB(DXGI_FORMAT fmt) override;
 
+		bool  IsBGR(DXGI_FORMAT fmt) override;
+
 		bool  IsTypeless(DXGI_FORMAT fmt, bool partialTypeless) override;
 
 		bool HasAlpha(DXGI_FORMAT fmt) override;
@@ -536,6 +538,8 @@ namespace DirectXTexNet
 		Size_t BitsPerPixel(DXGI_FORMAT fmt) override;
 
 		Size_t BitsPerColor(DXGI_FORMAT fmt) override;
+
+		Size_t BytesPerBlock(DXGI_FORMAT fmt) override;
 
 		void ComputePitch(DXGI_FORMAT fmt, Size_t width, Size_t height,
 			[Out] Size_T% rowPitch, [Out] Size_T% slicePitch, CP_FLAGS flags) override;
